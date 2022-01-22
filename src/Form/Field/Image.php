@@ -2,73 +2,62 @@
 
 namespace Encore\Admin\Form\Field;
 
-use Intervention\Image\ImageManagerStatic;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Image extends File
 {
+    use ImageField;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $view = 'admin::form.file';
+
+    /**
+     *  Validation rules.
+     *
+     * @var string
+     */
     protected $rules = 'image';
 
-    protected $calls = [];
-
-    public function prepare(UploadedFile $image = null)
+    /**
+     * @param array|UploadedFile $image
+     *
+     * @return string
+     */
+    public function prepare($image)
     {
-        if (is_null($image)) {
-            if ($this->isDeleteRequest()) {
-                return '';
-            }
-
-            return $this->original;
+        if ($this->picker) {
+            return parent::prepare($image);
         }
 
-        $this->directory = $this->directory ? $this->directory : config('admin.upload.image');
+        if (request()->has(static::FILE_DELETE_FLAG)) {
+            return $this->destroy();
+        }
 
-        $this->name = $this->name ? $this->name : $image->getClientOriginalName();
+        $this->name = $this->getStoreName($image);
 
-        $target = $this->uploadAndDeleteOriginal($image);
+        $this->callInterventionMethods($image->getRealPath());
 
-        $target = $this->executeCalls($target);
+        $path = $this->uploadAndDeleteOriginal($image);
 
-        return trim(str_replace(public_path(), '', $target->__toString()), '/');
+        $this->uploadAndDeleteOriginalThumbnail($image);
+
+        return $path;
     }
 
     /**
-     * @param $target
+     * force file type to image.
      *
-     * @return mixed
+     * @param $file
+     *
+     * @return array|bool|int[]|string[]
      */
-    public function executeCalls($target)
+    public function guessPreviewType($file)
     {
-        if (!empty($this->calls)) {
-            $image = ImageManagerStatic::make($target);
+        $extra = parent::guessPreviewType($file);
+        $extra['type'] = 'image';
 
-            foreach ($this->calls as $call) {
-                call_user_func_array([$image, $call['method']], $call['arguments'])->save($target);
-            }
-        }
-
-        return $target;
-    }
-
-    protected function preview()
-    {
-        return '<img src="/'.$this->value.'" class="file-preview-image">';
-    }
-
-    public function render()
-    {
-        $this->options(['allowedFileTypes' => ['image']]);
-
-        return parent::render();
-    }
-
-    public function __call($method, $arguments)
-    {
-        $this->calls[] = [
-            'method'    => $method,
-            'arguments' => $arguments,
-        ];
-
-        return $this;
+        return $extra;
     }
 }

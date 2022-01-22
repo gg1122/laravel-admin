@@ -25,7 +25,31 @@ class AuthTest extends TestCase
             ->see('dashboard')
             ->seeCredentials($credentials, 'admin')
             ->seeIsAuthenticated('admin')
-            ->seePageIs('admin');
+            ->seePageIs('admin')
+            ->see('Dashboard')
+            ->see('Description...')
+
+            ->see('Environment')
+            ->see('PHP version')
+            ->see('Laravel version')
+
+            ->see('Available extensions')
+            ->seeLink('laravel-admin-ext/helpers', 'https://github.com/laravel-admin-extensions/helpers')
+            ->seeLink('laravel-admin-ext/backup', 'https://github.com/laravel-admin-extensions/backup')
+            ->seeLink('laravel-admin-ext/media-manager', 'https://github.com/laravel-admin-extensions/media-manager')
+
+            ->see('Dependencies')
+            ->see('php')
+//            ->see('>=7.0.0')
+            ->see('laravel/framework');
+
+        $this
+            ->see('<span>Admin</span>')
+            ->see('<span>Users</span>')
+            ->see('<span>Roles</span>')
+            ->see('<span>Permission</span>')
+            ->see('<span>Operation log</span>')
+            ->see('<span>Menu</span>');
     }
 
     public function testLogout()

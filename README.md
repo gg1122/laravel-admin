@@ -1,255 +1,163 @@
-laravel-admin
-=====
+<p align="center">
+<a href="https://laravel-admin.org/">
+<img src="https://laravel-admin.org/images/logo002.png" alt="laravel-admin">
+</a>
 
-[![Build Status](https://travis-ci.org/z-song/laravel-admin.svg?branch=master)](https://travis-ci.org/z-song/laravel-admin)
-[![StyleCI](https://styleci.io/repos/48796179/shield)](https://styleci.io/repos/48796179)
-[![Packagist](https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000)](https://packagist.org/packages/encore/laravel-admin)
-[![Total Downloads](https://img.shields.io/packagist/dt/encore/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/encore/laravel-admin)
+<p align="center">⛵<code>laravel-admin</code> is administrative interface builder for laravel which can help you build CRUD backends just with few lines of code.</p>
 
-`laravel-admin` 是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。
+<p align="center">
+<a href="https://laravel-admin.org/docs">Documentation</a> |
+<a href="https://laravel-admin.org/docs/zh">中文文档</a> |
+<a href="https://demo.laravel-admin.org">Demo</a> |
+<a href="https://github.com/z-song/demo.laravel-admin.org">Demo source code</a> |
+<a href="#extensions">Extensions</a>
+</p>
 
-[Demo](http://120.26.143.106/admin) 账号/密码:admin/admin
+<p align="center">
+    <a href="https://travis-ci.org/z-song/laravel-admin">
+        <img src="https://travis-ci.org/z-song/laravel-admin.svg?branch=master" alt="Build Status">
+    </a>
+    <a href="https://styleci.io/repos/48796179">
+        <img src="https://styleci.io/repos/48796179/shield" alt="StyleCI">
+    </a>
+    <a href="https://packagist.org/packages/encore/laravel-admin">
+        <img src="https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000&&style=flat-square" alt="Packagist">
+    </a>
+    <a href="https://packagist.org/packages/encore/laravel-admin">
+        <img src="https://img.shields.io/packagist/dt/encore/laravel-admin.svg?style=flat-square" alt="Total Downloads">
+    </a>
+    <a href="https://github.com/z-song/laravel-admin">
+        <img src="https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg?style=flat-square" alt="Awesome Laravel">
+    </a>
+    <a href="#backers" alt="sponsors on Open Collective">
+        <img src="https://opencollective.com/laravel-admin/backers/badge.svg?style=flat-square" />
+    </a> 
+    <a href="https://www.paypal.me/zousong" alt="Paypal donate">
+        <img src="https://img.shields.io/badge/Donate-Paypal-green.svg?style=flat-square" />
+    </a> 
+</div>
 
-截图
+<p align="center">
+    Inspired by <a href="https://github.com/sleeping-owl/admin" target="_blank">SleepingOwlAdmin</a> and <a href="https://github.com/zofe/rapyd-laravel" target="_blank">rapyd-laravel</a>.
+</p>
+
+Sponsor
 ------------
 
-![grid](https://cloud.githubusercontent.com/assets/1479100/16609399/894e0832-4386-11e6-8709-1cc7ce429e7c.png)
+<a href="https://ter.li/32ifxj">
+<img src="https://user-images.githubusercontent.com/1479100/102449272-dc356880-406e-11eb-9079-169c8c2af81c.png" alt="laravel-admin" width="200px;">
+</a>
 
-![form](https://cloud.githubusercontent.com/assets/1479100/12708198/fc6725a8-c8d7-11e5-876f-5c4f00ded0ff.png)
 
-安装
+Requirements
+------------
+ - PHP >= 7.0.0
+ - Laravel >= 5.5.0
+ - Fileinfo PHP Extension
+
+Installation
 ------------
 
-```
-Laravel 5.2
-composer require encore/laravel-admin "dev-master"
+> This package requires PHP 7+ and Laravel 5.5, for old versions please refer to [1.4](https://laravel-admin.org/docs/v1.4/#/)
 
-Laravel 5.3
-composer require encore/laravel-admin "1.3.x-dev"
-
-Laravel 5.1
-composer require encore/laravel-admin "1.1.x-dev"
-```
-
-在`config/app.php`加入`ServiceProvider`:
+First, install laravel 5.5, and make sure that the database connection settings are correct.
 
 ```
-Encore\Admin\Providers\AdminServiceProvider::class
+composer require encore/laravel-admin
 ```
 
-然后运行下面的命令完成安装：
+Then run these commands to publish assets and config：
 
 ```
-php artisan vendor:publish --tag=laravel-admin
+php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+```
+After run command you can find config file in `config/admin.php`, in this file you can change the install directory,db connection or table names.
+
+At last run following command to finish install.
+```
 php artisan admin:install
 ```
 
-启动服务后，在浏览器打开 `http://localhost/admin/` ,使用用户名 `admin` 和密码 `admin`登陆.
+Open `http://localhost/admin/` in browser,use username `admin` and password `admin` to login.
 
-使用文档
+Configurations
 ------------
+The file `config/admin.php` contains an array of configurations, you can find the default configurations in there.
 
-- [快速开始](/docs/zh/quick-start.md)
-- [路由配置](/docs/zh/router.md)
-- [菜单配置](/docs/zh/menu.md)
-- [显示布局](/docs/zh/layout.md)
-- [数据模型表格](/docs/zh/model-grid.md)
-- [数据模型表单](/docs/zh/model-form.md)
-- [组件](/docs/zh/table.md)
-  - [表格](/docs/zh/table.md)
-  - [表单](/docs/zh/form.md)
-  - [盒子](/docs/zh/box.md)
-  - [信息盒子](/docs/zh/info-box.md)
-  - [选项卡](/docs/zh/tab.md)
-  - [滑动相册](/docs/zh/carousel.md)
-  - [折叠容器](/docs/zh/collapse.md)
-  - 数据图表 TODO
-- [权限控制](/docs/zh/permission.md)
+## Extensions
 
-目录结构
+| Extension                                        | Description                              | laravel-admin                              |
+| ------------------------------------------------ | ---------------------------------------- |---------------------------------------- |
+| [helpers](https://github.com/laravel-admin-extensions/helpers)             | Several tools to help you in development | ~1.5 |
+| [media-manager](https://github.com/laravel-admin-extensions/media-manager) | Provides a web interface to manage local files          | ~1.5 |
+| [api-tester](https://github.com/laravel-admin-extensions/api-tester) | Help you to test the local laravel APIs          |~1.5 |
+| [scheduling](https://github.com/laravel-admin-extensions/scheduling) | Scheduling task manager for laravel-admin          |~1.5 |
+| [redis-manager](https://github.com/laravel-admin-extensions/redis-manager) | Redis manager for laravel-admin          |~1.5 |
+| [backup](https://github.com/laravel-admin-extensions/backup) | An admin interface for managing backups          |~1.5 |
+| [log-viewer](https://github.com/laravel-admin-extensions/log-viewer) | Log viewer for laravel           |~1.5 |
+| [config](https://github.com/laravel-admin-extensions/config) | Config manager for laravel-admin          |~1.5 |
+| [reporter](https://github.com/laravel-admin-extensions/reporter) | Provides a developer-friendly web interface to view the exception          |~1.5 |
+| [wangEditor](https://github.com/laravel-admin-extensions/wangEditor) | A rich text editor based on [wangeditor](http://www.wangeditor.com/)         |~1.6 |
+| [summernote](https://github.com/laravel-admin-extensions/summernote) | A rich text editor based on [summernote](https://summernote.org/)          |~1.6 |
+| [china-distpicker](https://github.com/laravel-admin-extensions/china-distpicker) | 一个基于[distpicker](https://github.com/fengyuanchen/distpicker)的中国省市区选择器          |~1.6 |
+| [simplemde](https://github.com/laravel-admin-extensions/simplemde) | A markdown editor based on [simplemde](https://github.com/sparksuite/simplemde-markdown-editor)          |~1.6 |
+| [phpinfo](https://github.com/laravel-admin-extensions/phpinfo) | Integrate the `phpinfo` page into laravel-admin          |~1.6 |
+| [php-editor](https://github.com/laravel-admin-extensions/php-editor) <br/> [python-editor](https://github.com/laravel-admin-extensions/python-editor) <br/> [js-editor](https://github.com/laravel-admin-extensions/js-editor)<br/> [css-editor](https://github.com/laravel-admin-extensions/css-editor)<br/> [clike-editor](https://github.com/laravel-admin-extensions/clike-editor)| Several programing language editor extensions based on code-mirror          |~1.6 |
+| [star-rating](https://github.com/laravel-admin-extensions/star-rating) | Star Rating extension for laravel-admin          |~1.6 |
+| [json-editor](https://github.com/laravel-admin-extensions/json-editor) | JSON Editor for Laravel-admin          |~1.6 |
+| [grid-lightbox](https://github.com/laravel-admin-extensions/grid-lightbox) | Turn your grid into a lightbox & gallery          |~1.6 |
+| [daterangepicker](https://github.com/laravel-admin-extensions/daterangepicker) | Integrates daterangepicker into laravel-admin          |~1.6 |
+| [material-ui](https://github.com/laravel-admin-extensions/material-ui) | Material-UI extension for laravel-admin          |~1.6 |
+| [sparkline](https://github.com/laravel-admin-extensions/sparkline) | Integrates jQuery sparkline into laravel-admin          |~1.6 |
+| [chartjs](https://github.com/laravel-admin-extensions/chartjs) | Use Chartjs in laravel-admin          |~1.6 |
+| [echarts](https://github.com/laravel-admin-extensions/echarts) | Use Echarts in laravel-admin          |~1.6 |
+| [simditor](https://github.com/laravel-admin-extensions/simditor) | Integrates simditor full-rich editor into laravel-admin          |~1.6 |
+| [cropper](https://github.com/laravel-admin-extensions/cropper) | A simple jQuery image cropping plugin.          |~1.6 |
+| [composer-viewer](https://github.com/laravel-admin-extensions/composer-viewer) | A web interface of composer packages in laravel.          |~1.6 |
+| [data-table](https://github.com/laravel-admin-extensions/data-table) | Advanced table widget for laravel-admin |~1.6 |
+| [watermark](https://github.com/laravel-admin-extensions/watermark) | Text watermark for laravel-admin |~1.6 |
+| [google-authenticator](https://github.com/ylic/laravel-admin-google-authenticator) | Google authenticator |~1.6 |
+
+
+
+## Contributors
+ This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/laravel-admin/contributors.svg?width=890&button=false" /></a>
+ ## Backers
+ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/laravel-admin#backer)]
+ <a href="https://opencollective.com/laravel-admin#backers" target="_blank"><img src="https://opencollective.com/laravel-admin/backers.svg?width=890"></a>
+ ## Sponsors
+ Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/laravel-admin#sponsor)]
+ <a href="https://opencollective.com/laravel-admin/sponsor/0/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/1/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/2/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/3/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/4/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/5/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/6/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/7/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/8/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/laravel-admin/sponsor/9/website" target="_blank"><img src="https://opencollective.com/laravel-admin/sponsor/9/avatar.svg"></a>
+
+Other
 ------------
-安装完成之后，后台的安装目录为`app/Admin`，之后大部分的后台开发编码工作都是在这个目录下进行。
-
-`app/Admin/routes.php`文件用来配置后台路由，详细使用请阅读[路由配置](/docs/zh/router.md)。
-
-`app/Admin/menu.php`文件用来配置后台左侧菜单栏，详细使用请阅读[菜单栏配置](/docs/zh/menu.md)。
-
-
-`app/Admin/Controllers`目录用来存放后台路由器文件，该目录下的`HomeController.php`文件是后台首页的显示控制器，`ExampleController.php`为实例文件。
-
-快速开始
-------------
-
-用`Laravel`自带的`users`表举例,表结构为：
-```sql
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-```
-对应的数据模型为文件 `App\User.php`
-
-`laravel-admin`可以通过使用以下几步来快速生成`users`表的`CURD`操作页面：
-
-### 1.添加路由器
-```php
-<?php
-
-namespace App\Admin\Controllers;
-
-use App\User;
-use Encore\Admin\Form;
-use Encore\Admin\Grid;
-use Encore\Admin\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\AdminController;
-
-class UserController extends Controller
-{
-    use AdminController;
-
-    /**
-     * Index interface.
-     *
-     * @return Content
-     */
-    public function index()
-    {
-        return Admin::content(function (Content $content) {
-
-            $content->header('header');
-            $content->description('description');
-
-            $content->body($this->grid());
-        });
-    }
-
-    /**
-     * Edit interface.
-     *
-     * @param $id
-     * @return Content
-     */
-    public function edit($id)
-    {
-        return Admin::content(function (Content $content) use ($id) {
-
-            $content->header('header');
-            $content->description('description');
-
-            $content->body($this->form()->edit($id));
-        });
-    }
-
-    /**
-     * Create interface.
-     *
-     * @return Content
-     */
-    public function create()
-    {
-        return Admin::content(function (Content $content) {
-
-            $content->header('header');
-            $content->description('description');
-
-            $content->body($this->form());
-        });
-    }
-
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
-    protected function grid()
-    {
-        return Admin::grid(User::class, function (Grid $grid) {
-
-            $grid->id('ID')->sortable();
-
-            $grid->name('用户名');
-            $grid->email('邮箱');
-
-            $grid->created_at();
-            $grid->updated_at();
-        });
-    }
-
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
-    {
-        return Admin::form(User::class, function (Form $form) {
-
-            $form->display('id', 'ID');
-            
-            $form->text('name', '用户名');
-            $form->email('email', '用户邮箱');
-            $form->password('password', '密码');
-            
-            $form->dateTime('created_at', 'Created At');
-            $form->dateTime('updated_at', 'Updated At');
-        });
-    }
-}
-
-```
-
-### 2.添加路由配置
-
-在`laravel-admin`的路由配置文件`app/Admin/routes.php`里添加一行：
-```
-$router->resource('users', UserController::class);
-```
-
-### 3.添加左侧菜单栏连接
-
-打开文件`app/Admin/menu.php`,添加以下数据：
-
-```
-...
-[
-    'title' => '用户列表',
-    'url'   => 'users',
-    'icon'  => 'fa-users',
-],
-...
-
-```
-
-然后就能在后台管理页面的左侧边栏看到用户管理页面的链接入口了。
-
-对于数据表格(model-grid)和数据表单(model-form)的详细使用请查看[model-grid]()和[model-form]()。
-
-其它
-------------
-`laravel-admin` 基于以下组件或者服务:
+`laravel-admin` based on following plugins or services:
 
 + [Laravel](https://laravel.com/)
-+ [AdminLTE](https://almsaeedstudio.com/)
-+ [Bootstrap Markdown](http://toopay.github.io/bootstrap-markdown/)
++ [AdminLTE](https://adminlte.io/)
 + [Datetimepicker](http://eonasdan.github.io/bootstrap-datetimepicker/)
-+ [CodeMirror](https://codemirror.net/)
 + [font-awesome](http://fontawesome.io)
 + [moment](http://momentjs.com/)
 + [Google map](https://www.google.com/maps)
 + [Tencent map](http://lbs.qq.com/)
 + [bootstrap-fileinput](https://github.com/kartik-v/bootstrap-fileinput)
 + [jquery-pjax](https://github.com/defunkt/jquery-pjax)
-
-Inspired by [SleepingOwlAdmin](https://github.com/sleeping-owl/admin) and [rapyd-laravel](https://github.com/zofe/rapyd-laravel).
++ [Nestable](http://dbushell.github.io/Nestable/)
++ [toastr](http://codeseven.github.io/toastr/)
++ [X-editable](http://github.com/vitalets/x-editable)
++ [bootstrap-number-input](https://github.com/wpic/bootstrap-number-input)
++ [fontawesome-iconpicker](https://github.com/itsjavi/fontawesome-iconpicker)
++ [sweetalert2](https://github.com/sweetalert2/sweetalert2)
 
 License
 ------------
